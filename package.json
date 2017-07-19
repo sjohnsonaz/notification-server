@@ -1,0 +1,36 @@
+{
+  "name": "notification-server",
+  "version": "0.0.0",
+  "description": "",
+  "repository": "https://www.github.com/sjohnsonaz/notification-server.git",
+  "license": "MIT",
+  "author": "Sean Johnson <sjohnson@sjohnsonaz.com>",
+  "main": "dist/scripts/main.js",
+  "typings": "dist/scripts/main.d.ts",
+  "scripts": {
+    "start": "node ./dist/scripts/main.js",
+    "build": "tsc",
+    "prepublishOnly": "tsc --declaration",
+    "test": "tsc && node src/mocha/NodeRunner.js",
+    "min": "webpack --config webpack.config.js --progress",
+    "dev": "webpack --config webpack.dev.config.js --progress",
+    "watch": "webpack --config webpack.dev.config.js --watch --progress",
+    "node": "node ./dist/scripts/main.js",
+    "nodemon": "nodemon ./dist/scripts/main.js",
+    "mkdocs": "mkdocs build",
+    "mkdocs-serve": "mkdocs serve",
+    "mkdocs-deploy": "mkdocs gh-deploy"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/chai": "4.0.1",
+    "@types/mocha": "2.2.41",
+    "chai": "4.0.2",
+    "jsdom": "11.1.0",
+    "mocha": "3.4.2",
+    "nodemon": "1.11.0",
+    "ts-loader": "2.2.2",
+    "typescript": "2.4.1",
+    "webpack": "3.0.0"
+  }
+}
