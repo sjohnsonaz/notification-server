@@ -16,7 +16,12 @@
     "preserveConstEnums": true,
     "suppressImplicitAnyIndexErrors": true,
     "sourceMap": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "dom",
+      "es6",
+      "es2015.promise"
+    ]
   },
   "include": [
     "src"
