@@ -22,20 +22,23 @@
     "mkdocs-deploy": "mkdocs gh-deploy"
   },
   "dependencies": {
-    "express": "^4.15.3"
+    "body-parser": "1.17.2",
+    "express": "^4.15.3",
+    "es6-promise": "4.1.1",
+    "nedb": "1.8.0",
+    "web-push": "3.2.2"
   },
   "devDependencies": {
     "@types/chai": "4.0.1",
+    "@types/express": "4.0.36",
     "@types/mocha": "2.2.41",
+    "@types/nedb": "1.8.3",
     "chai": "4.0.2",
-    "es6-promise": "4.1.1",
     "jsdom": "11.1.0",
     "mocha": "3.4.2",
-    "nedb": "1.8.0",
     "nodemon": "1.11.0",
     "ts-loader": "2.2.2",
     "typescript": "2.4.1",
-    "webpack": "3.0.0",
-    "web-push": "3.2.2"
+    "webpack": "3.0.0"
   }
 }
