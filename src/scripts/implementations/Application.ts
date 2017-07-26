@@ -1,4 +1,6 @@
 import * as Express from 'express';
+import * as ExpressSession from 'express-session';
+import * as Grant from 'grant-express';
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 import * as Datastore from 'nedb';
@@ -6,7 +8,7 @@ import * as Datastore from 'nedb';
 import { IConfig } from '../interfaces/IConfig';
 
 import { allowCrossDomain } from '../middleware';
-import Routes from '../routes';
+import SubscriptionService from '../SubscriptionService';
 import Store from '../store';
 
 export default class Application {
@@ -25,12 +27,25 @@ export default class Application {
     }
 
     addMiddleware() {
+        // Grant OAuth
+        let grant = new Grant({
+
+        });
+        this.app.use(ExpressSession({ secret: 'grant' }));
+        this.app.use(grant);
+
+        // View Data
         this.app.locals.config = this.config;
+
+        // Header Information
         this.app.disable('x-powered-by');
         if (this.config.cors) {
             this.app.use(allowCrossDomain);
         }
+
+        // Body Parser
         this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({ extended: false }));
     }
 
     connectDatabase() {
@@ -50,9 +65,8 @@ export default class Application {
         });
         db.loadDatabase();
         const store = new Store(db);
-        const routes = new Routes();
-
-        routes.build(this.app, store);
+        const subscriptionService = new SubscriptionService(store);
+        this.app.use('/', subscriptionService.expressRouter);
     }
 
     listen() {

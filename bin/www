@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+var main = require('../dist/scripts/main');
+main.run();

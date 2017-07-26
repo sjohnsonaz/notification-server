@@ -1,7 +1,9 @@
 import Config from './config';
 import Application from './implementations/Application';
 
-const application = new Application(Config);
+export function run() {
+    const application = new Application(Config);
 
-application.init();
-application.listen();
+    application.init();
+    application.listen();
+}

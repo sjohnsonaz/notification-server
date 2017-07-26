@@ -22,10 +22,14 @@
     "mkdocs-deploy": "mkdocs gh-deploy"
   },
   "dependencies": {
+    "@types/express-session": "^1.15.1",
     "@types/mongoose": "^4.7.19",
     "body-parser": "1.17.2",
     "es6-promise": "4.1.1",
     "express": "^4.15.3",
+    "express-route-decorators": "^0.0.0",
+    "express-session": "^1.15.4",
+    "grant-express": "^3.8.0",
     "mongoose": "^4.11.4",
     "nedb": "1.8.0",
     "web-push": "3.2.2"
