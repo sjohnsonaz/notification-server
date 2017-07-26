@@ -1,6 +1,6 @@
 import * as DataStore from 'nedb';
 
-import { ISubscription, ISubscriptionDocument } from './ISubscription';
+import { ISubscription, ISubscriptionDocument } from './interfaces/ISubscription';
 
 export default class Store {
     db: DataStore;

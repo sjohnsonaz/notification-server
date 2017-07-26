@@ -1,6 +1,6 @@
 import * as webpush from 'web-push';
 
-import { ISubscriptionDocument } from './ISubscription';
+import { ISubscriptionDocument } from './interfaces/ISubscription';
 
 const vapidKeys = {
     publicKey: 'BFycNS1Ah5TUoHY-9pHWfsriqqsiyC2ZKcy8eMVkKdG5h2Ayi4Bnd6mgzBI02_Do7aH2HFVBtuNfag_WVaHtXx8',

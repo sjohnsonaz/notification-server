@@ -22,9 +22,11 @@
     "mkdocs-deploy": "mkdocs gh-deploy"
   },
   "dependencies": {
+    "@types/mongoose": "^4.7.19",
     "body-parser": "1.17.2",
-    "express": "^4.15.3",
     "es6-promise": "4.1.1",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.4",
     "nedb": "1.8.0",
     "web-push": "3.2.2"
   },
