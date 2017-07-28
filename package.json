@@ -32,6 +32,7 @@
     "grant-express": "^3.8.0",
     "mongoose": "^4.11.4",
     "nedb": "1.8.0",
+    "sierra": "0.0.0",
     "web-push": "3.2.2"
   },
   "devDependencies": {

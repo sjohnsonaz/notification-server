@@ -1,10 +1,10 @@
 import * as Express from 'express';
-import Router, { route } from 'express-route-decorators';
+import { Controller, route } from 'sierra';
 
 import Store from './store';
 import Push from './push';
 
-export default class SubscriptionService extends Router {
+export default class SubscriptionService extends Controller<Express.Router, Express.RequestHandler> {
     store: Store;
 
     constructor(store: Store) {
