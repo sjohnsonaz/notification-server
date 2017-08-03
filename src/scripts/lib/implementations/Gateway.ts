@@ -11,24 +11,24 @@ export default class Gateway<T extends mongoose.Document> {
         this.modelType = modelType;
     }
 
-    create(data, callback: (err: any, res: any) => void) {
+    async create(data: T) {
         var user = new this.modelType(data);
-        user.save(callback);
+        return user.save();
     }
 
-    get(id, callback: (err: any, res: T) => void) {
-        this.modelType.findOne({
+    async get(id) {
+        return this.modelType.findOne({
             _id: id
-        }, callback);
+        });
     }
 
-    list(params: {
-        find: any;
-        select: any;
-        page: number;
-        pageSize: number;
-        sort: any;
-    }, callback: (err: any, res?: IQueryResult<T>) => void) {
+    async list(params?: {
+        find?: any;
+        select?: any;
+        page?: number;
+        pageSize?: number | 'all';
+        sort?: any;
+    }) {
         params = params || {} as any;
         var find = params.find || {};
         var select = params.select;
@@ -36,46 +36,38 @@ export default class Gateway<T extends mongoose.Document> {
         var pageSize: number | string = typeof params.pageSize === 'string' ? params.pageSize || 20 : params.pageSize;
         var sort = params.sort;
 
-        this.modelType.find(find).count((err, count) => {
-            if (!err) {
-                var query = this.modelType.find(find);
-                if (select) {
-                    query = query.select(select);
-                }
-                if (pageSize !== 'all') {
-                    query = query.skip(page * (pageSize as number)).limit(pageSize as number);
-                }
-                if (sort) {
-                    query.sort(sort);
-                }
-                query.exec((err, result) => {
-                    if (!err) {
-                        callback(err, {
-                            count: count,
-                            results: result
-                        });
-                    } else {
-                        callback(err);
-                    }
-                });
-            } else {
-                callback(err);
-            }
-        });
+        let count = await this.modelType.find(find).count();
+        var query = this.modelType.find(find);
+        if (select) {
+            query = query.select(select);
+        }
+        if (pageSize !== 'all') {
+            query = query.skip(page * (pageSize as number)).limit(pageSize as number);
+        }
+        if (sort) {
+            query.sort(sort);
+        }
+        let results = await query.exec();
+        return {
+            count: count,
+            results: results
+        };
     }
 
-    update(id, data, callback: (err: any, raw: any) => void) {
-        this.modelType.update(
-            {
+    update(id, data: T) {
+        return this.modelType.update
+            ({
                 _id: id
-            }, data, {
+            },
+            data,
+            {
                 runValidators: true
-            }, callback);
+            });
     }
 
-    delete(id, callback: (err: any) => void) {
-        this.modelType.remove({
+    delete(id) {
+        return this.modelType.remove({
             _id: id
-        }, callback);
+        });
     }
 }
