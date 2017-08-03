@@ -5,7 +5,3 @@ export interface ISubscription {
         auth: string;
     }
 }
-
-export interface ISubscriptionDocument extends ISubscription {
-    _id: string;
-}
