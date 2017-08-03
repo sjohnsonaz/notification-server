@@ -1,13 +1,12 @@
 import { IConfig } from './interfaces/IConfig';
 let config: IConfig = {
-    port: 3000,
+    port: 3001,
     cors: true,
-    mongodb: {
-        uri: 'mongodb://localhost/cascade-demo',
-        options: {
-        }
+    deleteService: {
+        host: 'http://localhost',
+        port: 3000,
+        path: '/subscription/'
     }
-
 };
 
 export default config;

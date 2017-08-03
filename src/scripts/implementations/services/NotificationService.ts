@@ -2,44 +2,46 @@ import * as http from 'http';
 import * as Express from 'express';
 import { Controller, route } from 'sierra';
 
+import { IConfig } from '../../interfaces/IConfig';
+
 import Push from '../push';
 
-import { ISubscription, ISubscriptionDocument } from '../../interfaces/data/ISubscription';
+import { ISubscription } from '../../interfaces/data/ISubscription';
 
 export default class SubscriptionService extends Controller<Express.Router, Express.RequestHandler> {
-
-    constructor() {
+    deleteService: {
+        host: string;
+        port: number;
+        path: string;
+    }
+    constructor(config: IConfig) {
         super();
+        this.deleteService = config.deleteService;
     }
 
     @route('post', '/', false)
     async post(req, res) {
         let notification = JSON.stringify(req.body.notification);
         let subscriptions: ISubscription[] = req.body.subscriptions;
-        let promiseChain = Promise.resolve();
-
         try {
-            for (let i = 0; i < subscriptions.length; i++) {
-                const subscription = subscriptions[i];
-                promiseChain = promiseChain.then(() => {
-                    return Push.triggerPushMsg(subscription, notification).catch((err) => {
-                        if (err.statusCode === 410) {
-                            http.request({
-                                method: 'DELETE',
-                                host: 'http://localhost',
-                                port: 3000,
-                                path: '/subscription/' + subscription.keys.auth
-                            }, (res) => {
+            await Promise.all(subscriptions.map(async (subscription) => {
+                try {
+                    await Push.triggerPushMsg(subscription, notification);
+                } catch (err) {
+                    if (err.statusCode === 410) {
+                        http.request({
+                            method: 'DELETE',
+                            host: this.deleteService.host,
+                            port: this.deleteService.port,
+                            path: this.deleteService.path + subscription.keys.auth
+                        }, (res) => {
 
-                            });
-                        } else {
-                            console.log('Subscription is no longer valid: ', err);
-                        }
-                    });
-                });
-            }
-
-            await promiseChain;
+                        });
+                    } else {
+                        console.log('Subscription is no longer valid: ', err);
+                    }
+                }
+            }));
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify({ data: { success: true } }));
         } catch (err) {
