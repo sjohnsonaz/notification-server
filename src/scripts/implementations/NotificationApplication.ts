@@ -1,9 +1,6 @@
 import * as Express from 'express';
-import * as ExpressSession from 'express-session';
-import * as Grant from 'grant-express';
 import * as http from 'http';
 import * as bodyParser from 'body-parser';
-import * as mongoose from 'mongoose';
 import { Application, Controller } from 'sierra';
 
 import { IConfig } from '../interfaces/IConfig';
@@ -24,32 +21,11 @@ export default class NotificationApplication extends Application<Express.Router,
         this.app.set('port', this.port);
     }
 
-    connectDatabase() {
-        return new Promise<boolean>((resolve, reject) => {
-            (mongoose as any).Promise = global.Promise;
-            mongoose.connect(this.config.mongodb.uri, this.config.mongodb.options, (err) => {
-                if (err) {
-                    console.log('ERROR connecting to: ' + this.config.mongodb.uri + '. ' + err);
-                    reject(err);
-                } else {
-                    console.log('Succeeded connected to: ' + this.config.mongodb.uri);
-                    resolve(true);
-                }
-            });
-        });
+    async connectDatabase() {
+        return true;
     }
 
     addMiddleware() {
-        // Grant OAuth
-        let grant = new Grant({
-
-        });
-        this.app.use(ExpressSession({ secret: 'grant' }));
-        this.app.use(grant);
-
-        // View Data
-        this.app.locals.config = this.config;
-
         // Header Information
         this.app.disable('x-powered-by');
         if (this.config.cors) {
