@@ -1,6 +1,6 @@
 import * as webpush from 'web-push';
 
-import { ISubscriptionDocument } from './interfaces/data/ISubscription';
+import { ISubscription } from '../interfaces/data/ISubscription';
 
 const vapidKeys = {
     publicKey: 'BFycNS1Ah5TUoHY-9pHWfsriqqsiyC2ZKcy8eMVkKdG5h2Ayi4Bnd6mgzBI02_Do7aH2HFVBtuNfag_WVaHtXx8',
@@ -14,7 +14,7 @@ webpush.setVapidDetails(
 );
 
 export default class Push {
-    static triggerPushMsg<T>(subscription: ISubscriptionDocument, dataToSend: T): Promise<any> {
+    static triggerPushMsg<T>(subscription: ISubscription, dataToSend: T): Promise<any> {
         return webpush.sendNotification(subscription, dataToSend);
     }
 }

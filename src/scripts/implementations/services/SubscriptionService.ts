@@ -1,8 +1,8 @@
 import * as Express from 'express';
 import { Controller, route } from 'sierra';
 
-import Store from './store';
-import Push from './push';
+import Store from '../stores/store';
+import Push from '../../lib/push';
 
 export default class SubscriptionService extends Controller<Express.Router, Express.RequestHandler> {
     store: Store;

@@ -1,8 +1,8 @@
 import * as Datastore from 'nedb';
 
 import Config from './config';
-import SubscriptionService from './SubscriptionService';
-import Store from './store';
+import SubscriptionService from './implementations/services/SubscriptionService';
+import Store from './implementations/stores/store';
 
 import NotificationApplication from './implementations/NotificationApplication';
 

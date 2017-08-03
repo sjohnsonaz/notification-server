@@ -8,7 +8,7 @@ import { Application, Controller } from 'sierra';
 
 import { IConfig } from '../interfaces/IConfig';
 
-import { allowCrossDomain } from '../middleware';
+import { allowCrossDomain } from '../lib/middleware';
 
 export default class NotificationApplication extends Application<Express.Router, Express.RequestHandler> {
     config: IConfig;
