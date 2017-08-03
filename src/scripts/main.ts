@@ -1,8 +1,7 @@
 import * as Datastore from 'nedb';
 
 import Config from './config';
-import SubscriptionService from './implementations/services/SubscriptionService';
-import Store from './implementations/stores/store';
+import NotificationService from './implementations/services/NotificationService';
 
 import NotificationApplication from './implementations/NotificationApplication';
 
@@ -13,10 +12,9 @@ export function run() {
         filename: './data/subscriptionData.txt'
     });
     db.loadDatabase();
-    const store = new Store(db);
-    const subscriptionService = new SubscriptionService(store);
+    const notificationService = new NotificationService();
 
-    application.addController(subscriptionService);
+    application.addController(notificationService);
     application.init();
     application.listen();
 }

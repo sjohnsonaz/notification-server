@@ -2,17 +2,14 @@ import * as http from 'http';
 import * as Express from 'express';
 import { Controller, route } from 'sierra';
 
-import Store from '../stores/store';
-import Push from '../../lib/push';
+import Push from '../push';
 
 import { ISubscription, ISubscriptionDocument } from '../../interfaces/data/ISubscription';
 
 export default class SubscriptionService extends Controller<Express.Router, Express.RequestHandler> {
-    store: Store;
 
-    constructor(store: Store) {
+    constructor() {
         super();
-        this.store = store;
     }
 
     @route('post', '/', false)
