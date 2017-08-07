@@ -2,9 +2,9 @@
   "name": "notification-server",
   "version": "0.0.0",
   "description": "",
-  "repository": "https://www.github.com/sjohnsonaz/notification-server.git",
+  "repository": "https://www.github.com/cubex30/notification-server.git",
   "license": "MIT",
-  "author": "Sean Johnson <sjohnson@sjohnsonaz.com>",
+  "author": "Sean Johnson <sjohnson@cubexsystem.com>",
   "main": "dist/scripts/main.js",
   "typings": "dist/scripts/main.d.ts",
   "scripts": {

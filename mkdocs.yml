@@ -1,7 +1,7 @@
 site_name: Notification Server
-site_url: https://sjohnsonaz.github.io/notification-server
-repo_url: https://github.com/sjohnsonaz/notification-server
-copyright: Copyright &copy; 2017 Sean Johnson
+site_url: https://cubex30.github.io/notification-server
+repo_url: https://github.com/cubex30/notification-server
+copyright: Copyright &copy; 2017 Cubex LLC
 pages:
     - Home: index.md
 theme: readthedocs
